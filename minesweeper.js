@@ -1,15 +1,18 @@
 //minesweeper game by 101computing.net - www.101computing.et/minesweeper-in-javascript/
 var grid = document.getElementById("grid");
 var timer = document.getElementById("timer");
+var scores = document.getElementById("scores");
 let counter;
 var testMode = true; //Turn this variable to true to see where the mines are
 let params = {
     Nrows: 20,
     Ncolumns: 10,
-    Nmines: 30,
+    Nmines: 10,
 	gameStarted: false,
 	time: 0,
 }
+
+window.highscores.init("Minesweeper");
 
 generateGrid();
 
@@ -68,9 +71,13 @@ function checkLevelCompletion() {
 		}
 	}
 	if (levelComplete) {
-		alert("You Win!");
 		clearInterval(counter);
+		window.highscores.setScore(params.time);
 		revealMines();
+		scores.appendChild(window.highscores.getScoreboard());
+		// scores.style.display = "block";
+		scores.style.visibility = "visible";
+		scores.style.opacity = 1;
 	}
 }
 
