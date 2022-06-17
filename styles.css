@@ -7,7 +7,7 @@ body {
   
   h1 {
     text-align: center;
-    font-size: 14pt;
+    font-size: 50px;
     font-weight: normal;
   }
   #grid {
@@ -18,13 +18,15 @@ body {
   #grid TR TD{
     border:1px solid white;
     background: #999999;
-    width: 20px;
-    height: 20px;
+    width: 4vh;
+    height: 4vh;
     text-align: center;
+    font-size: 18px;
   }
   
   #grid TR TD.clicked {
       background: #333333;
+      font-size: 40px;
   }
   
   #grid TR TD.mine {
@@ -37,6 +39,7 @@ body {
 
   #timer{
     height: 20px;
+    font-size: 40px;
   }
 
   #scores {
@@ -49,3 +52,27 @@ body {
     height: 100%;
     background-color: black;
     transition:visibility 1s linear,opacity 1s ease-out 2s;  }
+
+    #scores h1 {
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 20vh;
+      margin-bottom: 5vh;
+    }
+
+    #scores span {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+    #scores div {
+      width: 350px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+    .row-score {
+      display: block;
+    }
+    .score-row {
+      margin-bottom: 15px;
+    }

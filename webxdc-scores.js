@@ -24,7 +24,7 @@ window.highscores = (() => {
                 current: addr === selfAddr,
                 ...players[addr],
             };
-        }).sort((a, b) => b.score - a.score);
+        }).sort((a, b) => a.score - b.score);
 
         for (let i = 0; i < scores.length; i++) {
             scores[i].pos = i + 1;
@@ -51,7 +51,7 @@ window.highscores = (() => {
         setScore: (score, force) => {
             const addr = window.webxdc.selfAddr;
             const old_score = getScore(addr);
-            if (score > old_score) {
+            if (score < old_score) {
                 const name = window.webxdc.selfName;
                 players[addr] = {name: name, score: score};
                 let info = name + " scored " + score;
@@ -82,12 +82,25 @@ window.highscores = (() => {
             for (let i = 0; i < table.length; i++) {
                 const player = table[i];
                 const pos = h("span", {class: "row-pos"}, player.pos);
+                const timeScore = ()=>{
+                var t = Number(player.score);
+                var h = Math.floor(t / 3600);
+                var s = Math.floor(t % 3600 % 60);
+                var m = Math.floor(t % 3600 / 60);
+            
+                var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
+                var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
+                var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
+            
+                    return hDisplay + mDisplay + sDisplay; 
+                }
+
                 pos.innerHTML += ".&nbsp;&nbsp;";
                 div.appendChild(
                     h("div", {class: "score-row" + (player.current ? " you" : "")},
                       pos,
                       h("span", {class: "row-name"}, player.name),
-                      h("span", {class: "row-score"}, player.score),
+                      h("span", {class: "row-score"}, timeScore()),
                      )
                 );
             }

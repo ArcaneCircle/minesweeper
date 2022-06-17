@@ -3,11 +3,11 @@ var grid = document.getElementById("grid");
 var timer = document.getElementById("timer");
 var scores = document.getElementById("scores");
 let counter;
-var testMode = true; //Turn this variable to true to see where the mines are
+var testMode = false; //Turn this variable to true to see where the mines are
 let params = {
     Nrows: 20,
     Ncolumns: 10,
-    Nmines: 10,
+    Nmines: 30,
 	gameStarted: false,
 	time: 0,
 }
@@ -87,7 +87,10 @@ function clickCell(cell) {
 	//Check if the end-user clicked on a mine
 	if (cell.getAttribute("data-mine") == "true") {
 		revealMines();
-		alert("Game Over");
+		clearInterval(counter);
+		scores.innerHTML = "<h1>Game Over</h1>";
+		scores.style.visibility = "visible";
+		scores.style.opacity = 1;
 	} else {
 		cell.className = "clicked";
 		//Count and display the number of adjacent mines
