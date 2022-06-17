@@ -5,7 +5,7 @@ var scores = document.getElementById("scores");
 let counter;
 var testMode = false; //Turn this variable to true to see where the mines are
 let params = {
-    Nrows: 20,
+    Nrows: 17,
     Ncolumns: 10,
     Nmines: 30,
 	gameStarted: false,
