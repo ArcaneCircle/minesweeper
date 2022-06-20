@@ -28,6 +28,8 @@ body {
   #grid TR TD.clicked {
       background: #333333;
       font-size: 20px;
+      border: none;
+      pointer-events: none;
   }
   
   #grid TR TD.mine {
@@ -41,30 +43,35 @@ body {
     margin-top: 5px;
   }
 
-  #scores {
+  .offscreen {
     visibility: hidden;
-    position: absolute;
     opacity: 0;
+    /* transition:visibility 1s linear,opacity 1s ease-out 1s;   */
+  }
+
+  .screen {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: black;
-    transition:visibility 1s linear,opacity 1s ease-out 1s;  }
+    transition:visibility 1s linear,opacity 1s ease-out 1s;  
+  }
 
-    #scores h1 {
+    .screen h1 {
       font-size: 22px;
       font-weight: bold;
       margin-top: 20vh;
       margin-bottom: 5vh;
     }
 
-    #scores span {
+    .screen span {
       margin-left: 20px;
       margin-right: 20px;
     }
 
-    #scores div {
+    .screen div {
       width: 350px;
       margin-right: auto;
       margin-left: auto;
