@@ -1,5 +1,9 @@
 window.highscores = (() => {
-    let players = [],
+    let players = {
+        easy: [],
+        medium: [],
+        hard: []
+    },
         _appName = "";
 
     function h(tag, attributes, ...children) {
@@ -13,16 +17,17 @@ window.highscores = (() => {
         return element;
     }
     
-    function getScore(addr) {
+    function getScore(addr,level) {
+        var playersLevel = players[level];
         return players[addr] ? players[addr].score : 0;
     }
 
-    function getHighScores() {
+    function getHighScores(level) {
         const selfAddr = window.webxdc.selfAddr;
-        const scores = Object.keys(players).map((addr) => {
+        const scores = Object.keys(players[level]).map((addr) => {
             return {
                 current: addr === selfAddr,
-                ...players[addr],
+                ...players[level][addr],
             };
         }).sort((a, b) => a.score - b.score);
 
@@ -48,12 +53,13 @@ window.highscores = (() => {
             return getScore(window.webxdc.selfAddr);
         },
 
-        setScore: (score, force) => {
+        setScore: (score, level) => {
             const addr = window.webxdc.selfAddr;
-            const old_score = getScore(addr);
+            const old_score = getScore(addr,level);
+            console.log("[wxdc-scores] old score in " + level + ": " + old_score);
             if (score < old_score) {
                 const name = window.webxdc.selfName;
-                players[addr] = {name: name, score: score};
+                players[level][addr] = {name: name, score: score};
                 let info = name + " scored " + score;
                 if (_appName) {
                     info += " in " + _appName;
@@ -64,6 +70,7 @@ window.highscores = (() => {
                             addr: addr,
                             name: name,
                             score: score,
+                            level: level
                         },
                         info: info,
                     },
@@ -76,8 +83,8 @@ window.highscores = (() => {
 
         getHighScores: getHighScores,
 
-        getScoreboard: () => {
-            let table = getHighScores();
+        getScoreboard: (level) => {
+            let table = getHighScores(level);
             let div = h("div");
             for (let i = 0; i < table.length; i++) {
                 const player = table[i];

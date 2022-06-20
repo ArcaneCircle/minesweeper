@@ -21,17 +21,17 @@ const levels = {
 easy: {
 	Nrows: 9,
 	Ncolumns: 9,
-	Nmines: 10
+	Nmines: 1 //10
 },
 medium: {
 	Nrows: 15,
 	Ncolumns: 9,
-	Nmines: 25
+	Nmines: 1 //25
 },
 hard: {
 	Nrows: 17,
 	Ncolumns: 10,
-	Nmines: 30
+	Nmines: 1 //30
 }
 
 };
@@ -45,6 +45,7 @@ function startGame() {
 		params.Nrows = levels.easy.Nrows;
 		params.Ncolumns = levels.easy.Ncolumns;
 		params.Nmines = levels.easy.Nmines;
+		params.level = "easy";
 		generateGrid();
 	});
 
@@ -52,6 +53,7 @@ function startGame() {
 		params.Nrows = levels.medium.Nrows;
 		params.Ncolumns = levels.medium.Ncolumns;
 		params.Nmines = levels.medium.Nmines;
+		params.level = "medium";
 		generateGrid();
 	});
 
@@ -59,12 +61,15 @@ function startGame() {
 		params.Nrows = levels.hard.Nrows;
 		params.Ncolumns = levels.hard.Ncolumns;
 		params.Nmines = levels.hard.Nmines;
+		params.level = "hard";
 		generateGrid();
 	});
-
 }
 
 function generateGrid() {
+
+	// console.log(levels[params.level]);
+	// console.log(params.level);
 	//clear home screen
 	home.remove();
 	//generate grid
@@ -131,9 +136,9 @@ function checkLevelCompletion() {
 	}
 	if (levelComplete) {
 		clearInterval(counter);
-		window.highscores.setScore(params.time);
+		window.highscores.setScore(params.time,params.level);
 		revealMines();
-		scores.appendChild(window.highscores.getScoreboard());
+		scores.appendChild(window.highscores.getScoreboard(params.level));
 		// scores.style.display = "block";
 		scores.style.visibility = "visible";
 		scores.style.opacity = 1;
