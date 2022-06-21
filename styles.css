@@ -4,6 +4,44 @@ body {
     font-family: courier new;
     text-align: center;
   }
+
+  button{
+    display: block;
+    width: 80%;
+    height: 30px;
+    margin-right: auto;
+    margin-left: auto;
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #000;
+  box-sizing: border-box;
+  color: #000;
+  cursor: pointer;
+  fill: #000;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  height: 48px;
+  justify-content: center;
+  letter-spacing: -.8px;
+  line-height: 24px;
+  min-width: 140px;
+  outline: 0;
+  padding: 0 17px;
+  text-align: center;
+  text-decoration: none;
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+
+/* @media (min-width: 768px) {
+  .button-59 {
+    min-width: 170px;
+  }
+} */
   
   h1 {
     text-align: center;
@@ -50,6 +88,7 @@ body {
   }
 
   .screen {
+    padding-top: 30px;
     position: absolute;
     top: 0;
     left: 0;
@@ -62,7 +101,7 @@ body {
     .screen h1 {
       font-size: 22px;
       font-weight: bold;
-      margin-top: 20vh;
+      margin-top: 10vh;
       margin-bottom: 5vh;
     }
 

@@ -21,17 +21,17 @@ const levels = {
 easy: {
 	Nrows: 9,
 	Ncolumns: 9,
-	Nmines: 5 //10
+	Nmines: 10 //10
 },
 medium: {
 	Nrows: 15,
 	Ncolumns: 9,
-	Nmines: 5 //25
+	Nmines: 25 //25
 },
 hard: {
-	Nrows: 17,
+	Nrows: 19,
 	Ncolumns: 10,
-	Nmines: 5 //30
+	Nmines: 35 //30
 }
 
 };

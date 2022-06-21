@@ -93,11 +93,23 @@ window.highscores = (() => {
                 const player = table[i];
                 const pos = h("span", {class: "row-pos"}, player.pos);
                 pos.innerHTML += ".&nbsp;&nbsp;";
+                var writtenScore =  () => {
+                   var t = Number(player.score);
+                var h = Math.floor(t / 3600);
+                var s = Math.floor((t % 3600) % 60);
+                var m = Math.floor((t % 3600) / 60);
+        
+                var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
+                var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
+                var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
+        
+                return hDisplay + mDisplay + sDisplay;
+                }
                 div.appendChild(
                     h("div", {class: "score-row" + (player.current ? " you" : "")},
                       pos,
                       h("span", {class: "row-name"}, player.name),
-                      h("span", {class: "row-score"}, player.score),
+                      h("span", {class: "row-score"}, writtenScore()),
                      )
                 );
             }
