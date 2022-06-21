@@ -23,6 +23,19 @@ window.highscores = (() => {
         return players[addr] ? players[addr].score : 10000000000;
     }
 
+    function getTime(seconds) {
+        var t = Number(seconds);
+     var h = Math.floor(t / 3600);
+     var s = Math.floor((t % 3600) % 60);
+     var m = Math.floor((t % 3600) / 60);
+
+     var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
+     var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
+     var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
+
+     return hDisplay + mDisplay + sDisplay;
+     }
+
     function getHighScores() {
         const selfAddr = window.webxdc.selfAddr;
         const scores = Object.keys(players).map((addr) => {
@@ -62,9 +75,9 @@ window.highscores = (() => {
             if (score <= old_score) {
                 const name = window.webxdc.selfName;
                 players[addr] = {name: name, score: score};
-                let info = name + " scored " + score;
+                let info = name + " scored " + getTime(score);
                 if (_appName) {
-                    info += " in " + _appName;
+                    info += " in " + _appName + " (" + level + ")";
                 }
                 allPlayers[level] = players; // update the general array
                 window.webxdc.sendUpdate(
@@ -93,23 +106,12 @@ window.highscores = (() => {
                 const player = table[i];
                 const pos = h("span", {class: "row-pos"}, player.pos);
                 pos.innerHTML += ".&nbsp;&nbsp;";
-                var writtenScore =  () => {
-                   var t = Number(player.score);
-                var h = Math.floor(t / 3600);
-                var s = Math.floor((t % 3600) % 60);
-                var m = Math.floor((t % 3600) / 60);
-        
-                var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
-                var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
-                var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
-        
-                return hDisplay + mDisplay + sDisplay;
-                }
+                var writtenScore =  getTime(player.score);
                 div.appendChild(
                     h("div", {class: "score-row" + (player.current ? " you" : "")},
                       pos,
                       h("span", {class: "row-name"}, player.name),
-                      h("span", {class: "row-score"}, writtenScore()),
+                      h("span", {class: "row-score"}, writtenScore),
                      )
                 );
             }
