@@ -21,22 +21,21 @@ const levels = {
 easy: {
 	Nrows: 9,
 	Ncolumns: 9,
-	Nmines: 1 //10
+	Nmines: 5 //10
 },
 medium: {
 	Nrows: 15,
 	Ncolumns: 9,
-	Nmines: 1 //25
+	Nmines: 5 //25
 },
 hard: {
 	Nrows: 17,
 	Ncolumns: 10,
-	Nmines: 1 //30
+	Nmines: 5 //30
 }
 
 };
 
-window.highscores.init("Minesweeper");
 
 startGame();
 
@@ -67,6 +66,9 @@ function startGame() {
 }
 
 function generateGrid() {
+	//init higscores
+	window.highscores.init("Minesweeper",params.level);
+
 
 	// console.log(levels[params.level]);
 	// console.log(params.level);
@@ -138,7 +140,8 @@ function checkLevelCompletion() {
 		clearInterval(counter);
 		window.highscores.setScore(params.time,params.level);
 		revealMines();
-		scores.appendChild(window.highscores.getScoreboard(params.level));
+		document.getElementById("level").innerHTML = params.level;
+		scores.appendChild(window.highscores.getScoreboard());
 		// scores.style.display = "block";
 		scores.style.visibility = "visible";
 		scores.style.opacity = 1;
