@@ -166,7 +166,7 @@ function clickCell(cell) {
 		if (cell.getAttribute("data-mine") == "true") {
 			revealMines();
 			clearInterval(counter);
-			scores.innerHTML = "<h1>Game Over</h1>";
+			scores.innerHTML = "<h1>Game Over</h1><br><button onclick='location.reload();'>Play again</button>";
 			scores.style.visibility = "visible";
 			scores.style.opacity = 1;
 		} else {
